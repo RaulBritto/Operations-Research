@@ -1,11 +1,10 @@
 module Simplex
 
 using LinearAlgebra
-
-greet() = print("Hello World!")
+using MathOptInterface
+using JuMP
 
 include("tableauSimplex.jl")
 
-export tableauSimplex
 
 end # module
