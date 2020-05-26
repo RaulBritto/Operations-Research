@@ -1,8 +1,8 @@
 function Model2Matriz(model::Model)
 
     c = Array{Float64,1}()
-    b = Array{Float64,1}()
-    A = Array{Float64}(undef, 0, num_variables(model))
+    b = Array{Int64,1}()
+    A = Array{Int64}(undef, 0, num_variables(model))
     restriction = reshape(zeros(num_variables(model)), 1, num_variables(model))
 
     min_max = Int8(objective_sense(model))
