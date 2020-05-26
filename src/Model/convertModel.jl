@@ -1,21 +1,22 @@
 function Model2Matriz(model::Model)
-    n = num_variables(model)
+
     c = Array{Float64,1}()
 
-    min_max = objective_sense(model)
+    min_max = Int8(objective_sense(model))
 
-    println(min_max)
-
-    if occursin(print(min_max), "MIN") 
-        println("minimizacao")
-    else
-        println("maximizacao")
+    if min_max == 0
+        objective = objective_function(model)*-1
+    elseif min_max == 1
+        objective = objective_function(model)
     end
 
-
-    for i = 1:n
-        variables = all_variables(model)
-        currentVariable = variables[i]
-
+    variables = all_variables(model)
+    for i=1:num_variables(model)
+       append!(c,objective.terms[variables[i]])
     end
+
+    println(c)    
+    
+
+
 end
