@@ -6,6 +6,6 @@ function main(model::Model)
     println(A)
     println(b)
     println(c)
-    Simplex.tableauSimplex(A,b,c)
+    Simplex.primalSolution(A,b,c)
 
 end
