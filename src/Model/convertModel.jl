@@ -49,8 +49,5 @@ function Model2Matriz(model::Model)
         append!(b,normalized_rhs(constraints[1]))
     end
  
-    println(A)
-    println(b)
-    println(c)
-
+    return A,b,c
 end
