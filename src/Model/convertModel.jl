@@ -38,6 +38,17 @@ function Model2Matriz(model::Model)
         end
     end
     
+    constraints = all_constraints(model, AffExpr, MOI.LessThan{Float64})
+    for i=1:num_constraints(model, AffExpr, MOI.LessThan{Float64})
+        restriction = reshape(zeros(num_variables(model)), 1, num_variables(model))
+        for j=1:num_variables(model)
+            restriction[j] = normalized_coefficient(constraints[i],variables[j])    
+        end
+        A = vcat(A,restriction)
+
+        append!(b,normalized_rhs(constraints[1]))
+    end
+ 
     println(A)
     println(b)
     println(c)
