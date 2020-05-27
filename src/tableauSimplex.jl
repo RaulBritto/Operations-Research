@@ -30,6 +30,12 @@ function primalSolution(A, b, c, n)
                 end
                  
             end
+
+            if isempty(filter((x) -> !isinf(x), costs))
+                println("Solução ilimitada!")
+                break
+            end 
+
             pivotRowIndex = argmin(costs)
             pivotRow = tableau[pivotRowIndex+1, :]
             pivotRow = pivotRow ./ pivotRow[pivotColumnIndex]
