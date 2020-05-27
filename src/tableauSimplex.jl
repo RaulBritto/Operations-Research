@@ -1,9 +1,9 @@
-function primalSolution(A, b, c, n)
+function primalSolution(A, b, c, z, n)
     nrows = size(A,1)
 
     cl = -c
     xb = collect(n+1:n+nrows)
-    tableau = [ [transpose(cl) ;A] [0;b]]
+    tableau = [ [transpose(cl) ;A] [-z;b]]
 
 
     while true
