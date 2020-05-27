@@ -1,3 +1,5 @@
+using LinearAlgebra
+
 function Model2Matriz(model::Model)
 
     c = Array{Float64,1}()
@@ -21,15 +23,14 @@ function Model2Matriz(model::Model)
 
     for i=1:num_variables(model)
 
-        if has_upper_bound(variables[i])
-            append!(b,upper_bound(variables[i]))
-        end
-
         if has_lower_bound(variables[i])
             if lower_bound(variables[i]) == 0
-                restriction[i] = 1
-                A = vcat(A,restriction)
-                restriction[i] = 0
+                if has_upper_bound(variables[i])
+                    append!(b,upper_bound(variables[i]))
+                    restriction[i] = 1
+                    A = vcat(A,restriction)
+                    restriction[i] = 0
+                end
             else
                 #TODO new lower_bound to 0
             end
@@ -45,9 +46,10 @@ function Model2Matriz(model::Model)
             restriction[j] = normalized_coefficient(constraints[i],variables[j])    
         end
         A = vcat(A,restriction)
-
-        append!(b,normalized_rhs(constraints[1]))
+        append!(b,normalized_rhs(constraints[i]))
+        append!(c,0)
     end
+    A = hcat(A, Matrix{Int}(I, num_constraints(model, AffExpr, MOI.LessThan{Float64}), num_constraints(model, AffExpr, MOI.LessThan{Float64})))
  
     return A,b,c
 end
