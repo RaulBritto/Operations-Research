@@ -6,7 +6,7 @@ using JuMP
 
 include("tableauSimplex.jl")
 include("main.jl")
-include("Model/convertModel.jl")
+include("convertModel.jl")
 
 
 end # module

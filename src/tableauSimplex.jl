@@ -1,9 +1,9 @@
-function primalSolution(A, b, c)
+function primalSolution(A, b, c, n)
     nrows = size(A,1)
 
-    cl = [-c; zeros(nrows)]
-    xb = collect(nrows: 2*nrows-1)
-    tableau = [ [transpose(cl) ;A I] [0;b]]
+    cl = -c
+    xb = collect(n+1:n+nrows)
+    tableau = [ [transpose(cl) ;A] [0;b]]
 
 
     while true
@@ -21,7 +21,15 @@ function primalSolution(A, b, c)
         else
             pivotColumnIndex = argmin(Z)
             pivotColumn = tableau[2:end, pivotColumnIndex]
-            costs = tableau[2:end, end] ./ pivotColumn
+            costs = []
+            for (index, value) in enumerate(pivotColumn)
+                if pivotColumn[index] > 0
+                    append!(costs, tableau[1+index,end] / value)
+                else 
+                    append!(costs,Inf)
+                end
+                 
+            end
             pivotRowIndex = argmin(costs)
             pivotRow = tableau[pivotRowIndex+1, :]
             pivotRow = pivotRow ./ pivotRow[pivotColumnIndex]
