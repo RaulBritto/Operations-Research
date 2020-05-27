@@ -49,7 +49,7 @@ function Model2Matriz(model::Model)
         append!(b,normalized_rhs(constraints[i]))
         append!(c,0)
     end
-    A = hcat(A, Matrix{Int}(I, num_constraints(model, AffExpr, MOI.LessThan{Float64}), num_constraints(model, AffExpr, MOI.LessThan{Float64})))
+    A = hcat(A, Matrix{Int64}(I, num_constraints(model, AffExpr, MOI.LessThan{Float64}), num_constraints(model, AffExpr, MOI.LessThan{Float64})))
  
     return A,b,c
 end
