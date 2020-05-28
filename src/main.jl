@@ -7,5 +7,6 @@ function main(model::Model)
     #println(b)
     #println(c)
     Simplex.primalSolution(A,b,c,z,num_variables(model))
+    dual = Simplex.dual(model,b)
 
 end
