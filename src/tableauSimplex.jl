@@ -8,7 +8,7 @@ function primalSolution(A, b, c, z, n)
 
     while true
         Z = tableau[1,:]
-        if all(Z .>= 0)
+        if all(Z[1:end-1] .>= 0)
             println("Solução ótima encontrada!")
             println(tableau)
             y = tableau[2:end, end]
@@ -19,7 +19,7 @@ function primalSolution(A, b, c, z, n)
             println(Z[end])
             break
         else
-            pivotColumnIndex = argmin(Z)
+            pivotColumnIndex = argmin(Z[1:end-1])
             pivotColumn = tableau[2:end, pivotColumnIndex]
             costs = []
             for (index, value) in enumerate(pivotColumn)
@@ -28,7 +28,6 @@ function primalSolution(A, b, c, z, n)
                 else 
                     append!(costs,Inf)
                 end
-                 
             end
 
             if isempty(filter((x) -> !isinf(x), costs))
