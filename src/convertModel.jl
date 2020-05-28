@@ -1,6 +1,6 @@
 using LinearAlgebra
 
-function Model2Matriz(model::Model)
+function convert(model::Model)
 
     c = Array{Float64,1}()
     b = Array{Int64,1}()

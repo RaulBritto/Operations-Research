@@ -1,6 +1,5 @@
 using MathOptInterface
 
-
 function dual(model::Model,b)
 
     dualModel = Model()
@@ -33,7 +32,7 @@ function dual(model::Model,b)
     variables = all_variables(dualModel)
 
     for i=1:num_variables(dualModel)
-        set_objective_coefficient(dualModel,variables[i], convert(Float64,b[i]))
+        set_objective_coefficient(dualModel,variables[i], Base.convert(Float64,b[i]))
     end
 
 
@@ -104,4 +103,5 @@ function dual(model::Model,b)
         end
     end
 
+    println("\nDual Model:\n",dualModel)
 end

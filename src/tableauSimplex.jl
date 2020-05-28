@@ -1,4 +1,4 @@
-function primalSolution(A, b, c, z, n)
+function optimize(A, b, c, z, n)
     nrows = size(A,1)
 
     cl = -c
@@ -10,13 +10,12 @@ function primalSolution(A, b, c, z, n)
         Z = tableau[1,:]
         if all(Z[1:end-1] .>= 0)
             println("Solução ótima encontrada!")
-            println(tableau)
             y = tableau[2:end, end]
             solution = [xb y]
             solution = solution[solution[:, 1] .<= size(A,2),:]
             solution = Dict(zip(string.("x",round.(Int,solution[:,1])), solution[:,2]))
-            println(solution)
-            println(Z[end])
+            println("Z = ", Z[end])
+            println("Solução básica: \n",solution)
             break
         else
             pivotColumnIndex = argmin(Z[1:end-1])
