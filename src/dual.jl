@@ -4,9 +4,9 @@ function dual(model::Model,b)
 
     dualModel = Model()
     index = 1
-    A_ = Array{Int64}(undef, 0, num_variables(model))
+    A_ = Array{Float64}(undef, 0, num_variables(model))
     c_ = Array{Float64,1}()
-    restriction = reshape(zeros(Int64,num_variables(model)), 1, num_variables(model))
+    restriction = reshape(zeros(Float64,num_variables(model)), 1, num_variables(model))
 
     #Setting the variables
     constraints = all_constraints(model, AffExpr, MOI.LessThan{Float64})
