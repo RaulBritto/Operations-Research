@@ -8,6 +8,7 @@ include("tableauSimplex.jl")
 include("main.jl")
 include("convertModel.jl")
 include("dual.jl")
+include("postOptimization.jl")
 
 
 end # module
