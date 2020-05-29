@@ -1,9 +1,7 @@
 function optimize(A, b, c, z, n)
     nrows = size(A,1)
-
-    cl = -c
     xb = collect(n+1:n+nrows)
-    tableau = [ [transpose(cl) ;A] [-z;b]]
+    tableau = [ [transpose(-c) ;A] [-z;b]]
 
 
     while true
@@ -54,4 +52,5 @@ function optimize(A, b, c, z, n)
         end
     end
 
+    return  tableau
 end
