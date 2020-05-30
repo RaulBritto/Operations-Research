@@ -26,4 +26,5 @@ model = Model()
 ```
 To solve the problem use the follow command:
 ```julia
+using Simplex
 Simplex.main(model)
