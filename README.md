@@ -5,8 +5,7 @@ This repository has the implementation of the tableau simplex algorithm made dur
 The simplex algorithm has been developed using Julia lang version 1.4.1 (2020-04-14) and models are created using [JuMP](https://www.juliaopt.org/JuMP.jl/stable/). To install the Simplex package use the follow command from Julia REPL:
 
 ```julia
-import Pkg
-Pkg.add("https://github.com/RaulBritto/Operations-Research.git")
+(@v1.4) pkg> add https://github.com/RaulBritto/Operations-Research.git
 ```
 
 ##
@@ -27,4 +26,5 @@ model = Model()
 ```
 To solve the problem use the follow command:
 ```julia
+using Simplex
 Simplex.main(model)
