@@ -1,4 +1,4 @@
-function SensAnalysis(tableau, model::Model)
+function SensAnalysis(tableau, model::Model, b)
     nrows = size(tableau,1)-1
     shadowPrice = tableau[1,num_variables(model)+1:num_variables(model)+nrows]
     
@@ -7,11 +7,13 @@ function SensAnalysis(tableau, model::Model)
 
     println("\nDual:")
     for i = 1: length(shadowPrice)
-        println("restrição[", i, "] = ", shadowPrice[i])
+        println("λ[", i, "] = ", shadowPrice[i])
     end
+
 
     v = Float64[-Inf, Inf]
     V = Array[]    
+    println("Variação de restrições")
     for i = 1:nrows
         push!(V,copy(v))
         delta = zeros(nrows)
@@ -27,7 +29,7 @@ function SensAnalysis(tableau, model::Model)
         replace!(V[i], Inf=>0)
         replace!(V[i], -Inf=>0)
 
-        println(b[i]-V[i][1]" <= b[",i,"] <= ", b[i]+V[i][2])
+        println(b[i]+V[i][1], " <= b[",i,"] <= ", b[i]+V[i][2])
     end
     
 end
