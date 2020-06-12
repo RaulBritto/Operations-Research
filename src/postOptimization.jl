@@ -7,7 +7,7 @@ function SensAnalysis(tableau, model::Model, b)
 
     println("\nDual:")
     for i = 1: length(shadowPrice)
-        println("λ[", i, "] = ", shadowPrice[i])
+        println("λ[", i, "] = ", round(shadowPrice[i], digits = 4))
     end
 
 
@@ -29,7 +29,7 @@ function SensAnalysis(tableau, model::Model, b)
         replace!(V[i], Inf=>0)
         replace!(V[i], -Inf=>0)
 
-        println(b[i]+V[i][1], " <= b[",i,"] <= ", b[i]+V[i][2])
+        println( round(b[i]+V[i][1], digits = 4), " <= b[",i,"] <= ", round(b[i]+V[i][2], digits = 4))
     end
     
 end

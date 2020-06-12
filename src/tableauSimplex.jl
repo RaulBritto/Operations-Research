@@ -11,8 +11,8 @@ function optimize(A, b, c, z, n)
             y = tableau[2:end, end]
             solution = [xb y]
             solution = solution[solution[:, 1] .<= size(A,2),:]
-            solution = Dict(zip(string.("x",round.(Int,solution[:,1])), solution[:,2]))
-            println("Z = ", Z[end])
+            solution = Dict(zip(string.("x",round.(Int,solution[:,1])), round.(solution[:,2], digits=4)))
+            println("Z = ", round(Z[end], digits=4))
             println("Solução básica: \n",solution)
             break
         else
