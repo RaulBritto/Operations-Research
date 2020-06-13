@@ -52,5 +52,5 @@ function optimize(A, b, c, z, n)
         end
     end
 
-    return  tableau
+    return  tableau, xb
 end

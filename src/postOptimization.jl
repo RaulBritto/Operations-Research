@@ -1,9 +1,16 @@
-function SensAnalysis(tableau, model::Model, b)
-    nrows = size(tableau,1)-1
-    shadowPrice = tableau[1,num_variables(model)+1:num_variables(model)+nrows]
+function SensAnalysis(A, b, c, xb)
+    nrows = size(A,1)
+    cb = zeros(nrows)
+    B =  zeros(nrows, nrows)
+
+    for i=1:nrows
+        B[:,i] = A[:,xb[i]]
+        cb[i] = c[xb[i]]
+    end
     
-    S = tableau[2:end,num_variables(model)+1:num_variables(model)+nrows]
-    b_ = tableau[2:end, end]
+    S = inv(B)
+    b_ = S*b
+    shadowPrice = transpose(cb)*S
 
     println("\nDual:")
     for i = 1: length(shadowPrice)
